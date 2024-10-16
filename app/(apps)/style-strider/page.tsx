@@ -15,7 +15,7 @@ export default function Home() {
           <div className='relative shadow-xl sm:rounded-2xl sm:overflow-hidden'>
             <div className='absolute inset-0'>
               <Image
-                src='/images/style-strider-hero.png'
+                src='/images/style-strider/style-strider-hero.png'
                 alt='People wearing StyleStrider shoes'
                 layout='fill'
                 objectFit='cover'
