@@ -92,7 +92,7 @@ export default function AppWindow({ title, url, onClose }: AppWindowProps) {
       document.removeEventListener('mouseup', handleMouseUp);
       document.body.style.pointerEvents = 'auto';
     };
-  }, [isDragging, isResizing, dragOffset, resizeDirection]);
+  }, [isDragging, isResizing, dragOffset, resizeDirection, size]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (windowRef.current && !(e.target as HTMLElement).closest('button')) {

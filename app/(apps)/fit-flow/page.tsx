@@ -105,7 +105,7 @@ const testimonials = [
   },
 ];
 
-export function TestimonialSection() {
+function TestimonialSection() {
   return (
     <section className='bg-muted py-24 sm:py-32 flex justify-center'>
       <div className='container'>
