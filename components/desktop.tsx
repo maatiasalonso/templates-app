@@ -33,14 +33,14 @@ const initialApps: App[] = [
   {
     id: 'style-strider',
     name: 'Style Strider',
-    image: '/images/style-strider-icon.jpeg',
+    image: '/images/style-strider/style-strider-icon.jpeg',
     route: '/style-strider',
     position: { x: 20, y: 20 },
   },
   {
     id: 'fit-flow',
     name: 'Fit Flow',
-    image: '/images/fit-flow-icon.png',
+    image: '/images/fit-flow/fit-flow-icon.png',
     route: '/fit-flow',
     position: { x: 120, y: 20 },
   },
