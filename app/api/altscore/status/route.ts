@@ -17,14 +17,14 @@ export async function GET() {
     damaged_system: currentDamagedSystem,
   };
 
-  // Set a cookie to store the damaged system
+
   const cookieOptions = {
-    maxAge: 60 * 60 * 24, // 1 day
-    httpOnly: true, // Prevents client-side access
-    path: '/', // Cookie is accessible on the entire site
+    maxAge: 60 * 60 * 24,
+    httpOnly: true,
+    path: '/',
   };
 
-  const res = NextResponse.json(response);
+  const res = NextResponse.json(response, { headers: { 'Cache-Control': 'no-store' } });
   res.cookies.set('damaged_system', currentDamagedSystem, cookieOptions);
 
   return res;

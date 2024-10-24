@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       headers: { 'Content-Type': 'text/plain' },
     });
   }
-  
+
   const code = damagedSystems[currentDamagedSystem as keyof typeof damagedSystems];
   const html = `<!DOCTYPE html>
 <html>
@@ -32,6 +32,6 @@ export async function GET(request: Request) {
 </html>`;
   return new NextResponse(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html' },
+    headers: { 'Content-Type': 'text/html', 'Cache-Control': 'no-store' },
   });
 }
