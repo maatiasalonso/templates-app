@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
 
 const damagedSystems = {
   navigation: 'NAV-01',
@@ -10,23 +8,19 @@ const damagedSystems = {
   deflector_shield: 'SHLD-05',
 };
 
-export async function GET() {
-  const filePath = path.join(process.cwd(), 'data', 'damagedSystem.json');
+export async function GET(request: Request) {
+  const cookieHeader = request.headers.get('cookie');
+  const cookies = cookieHeader ? Object.fromEntries(cookieHeader.split('; ').map(cookie => cookie.split('='))) : {};
+  const currentDamagedSystem = cookies['damaged_system'];
 
-  try {
-    await fs.access(filePath);
-  } catch {
-    return new NextResponse('File not found', {
-      status: 404,
+  if (!currentDamagedSystem) {
+    return new NextResponse('No damaged system found in cookies', {
+      status: 400,
       headers: { 'Content-Type': 'text/plain' },
     });
   }
-
-  const data = await fs.readFile(filePath, 'utf-8');
-  const parsedData = JSON.parse(data);
-  const currentDamagedSystem = parsedData.damaged_system;
-  const code =
-    damagedSystems[currentDamagedSystem as keyof typeof damagedSystems];
+  
+  const code = damagedSystems[currentDamagedSystem as keyof typeof damagedSystems];
   const html = `<!DOCTYPE html>
 <html>
 <head>

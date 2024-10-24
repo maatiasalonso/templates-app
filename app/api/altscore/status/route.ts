@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
 
 const damagedSystems = {
   navigation: 'NAV-01',
@@ -19,18 +17,15 @@ export async function GET() {
     damaged_system: currentDamagedSystem,
   };
 
-  const filePath = path.join(process.cwd(), 'data', 'damagedSystem.json');
+  // Set a cookie to store the damaged system
+  const cookieOptions = {
+    maxAge: 60 * 60 * 24, // 1 day
+    httpOnly: true, // Prevents client-side access
+    path: '/', // Cookie is accessible on the entire site
+  };
 
-  try {
-    await fs.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, JSON.stringify(response, null, 2), { flag: 'w', encoding: 'utf-8' });
-  } catch (error) {
-    console.error('Error writing to file:', error);
-    return NextResponse.json(
-      { error: 'Failed to store damaged system.' },
-      { status: 500 }
-    );
-  }
+  const res = NextResponse.json(response);
+  res.cookies.set('damaged_system', currentDamagedSystem, cookieOptions);
 
-  return NextResponse.json(response);
+  return res;
 }
