@@ -32,6 +32,6 @@ export async function GET(request: Request) {
 </html>`;
   return new NextResponse(html, {
     status: 200,
-    headers: { 'Content-Type': 'text/html', 'Cache-Control': 'no-store' },
+    headers: { 'Cache-Control': 'no-store' },
   });
 }
